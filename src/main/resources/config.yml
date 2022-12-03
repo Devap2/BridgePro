@@ -77,22 +77,8 @@ disable-item-pick-up: true
 # To disable players from breaking blocks.
 disable-block-breaking: true
 
-# To set the player invulnerable.
-enable-invulnerability: true
-
 # To enable immediate player respawn.
 enable-immediate-respawn: true
-
-# ---[ Fly Section ]--- #
-
-# To disable the usage of the /fly command.
-enable-fly-command: true
-
-# To change the message when enabling flying.
-fly-on-message: "&aEnabled Fly!"
-
-# To change the message when disabling flying.
-fly-off-message: "&cDisabled Fly!"
 
 # ---[ Particle Section ]--- #
 

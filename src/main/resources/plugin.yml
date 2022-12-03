@@ -1,0 +1,15 @@
+name: BridgePro
+version: '${project.version}'
+main: me.devap.bridgepro.BridgePro
+api-version: 1.18
+authors: [ Devap ]
+description: An Configurable And Easy To Use Bridge Plugin For Your Minecraft Server.
+commands:
+  bp:
+    description: Displays a Overview of Information And Commands About the Lobby Pro Plugin.
+    aliases:
+      - bridge-pro
+  sb:
+    description: Open's the scoreboard.
+    aliases:
+      - scoreboard

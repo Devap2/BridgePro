@@ -1,0 +1,104 @@
+# --- *BridgePro* Configuration File --- #
+
+# ---[ Locations/Boundary's Section ]--- #
+
+# Change the default lobby spawn location.
+# (You can use '/bp set-spawn' to set the lobby location in game.)
+bridge-lobby-location:
+  World-name:
+  X:
+  Y:
+  Z:
+  Yaw:
+  Pitch:
+
+# To set the first game boundary.
+# (You can use '/bp set-boundary-one' to set the lobby location in game.)
+game-boundary-one:
+  World-name:
+  X:
+  Y:
+  Z:
+  Yaw:
+  Pitch:
+
+# To set the second game boundary.
+game-boundary-two:
+  World-name:
+  X:
+  Y:
+  Z:
+  Yaw:
+  Pitch:
+
+# ---[ Player Join Section ]--- #
+
+# To send a join message when a player joins the server.
+enable-join-message: true
+
+# To change the message send to the player on server join.
+join-message: "&a&lWelcome to the bridge."
+
+# To clean the inventory on server join.
+join-clear-inventory: true
+
+# To enable a sound played when a player joins.
+enable-sound-on-join: true
+
+# ---[ Disable/Enable Events Section ]--- #
+
+# To disable the player fall damage.
+disable-fall-damage: true
+
+# To disable the player hunger.
+disable-hunger: true
+
+# To disable the weather from changing.
+disable-weather-change: true
+
+# To disable tnt from exploding.
+disable-tnt-explosion: true
+
+# To disable lava damage for players.
+disable-lava-damage: true
+
+# To disable fire damage for players.
+disable-fire-damage: true
+
+# To disable players from moving items in inventory.
+disable-item-move: true
+
+# To disable players from swapping items in their inventory. (Except if they're in game-mode creative, or are op.)
+disable-item-swap: true
+
+# To disable players from picking up items.
+disable-item-pick-up: true
+
+# To disable players from breaking blocks.
+disable-block-breaking: true
+
+# To set the player invulnerable.
+enable-invulnerability: true
+
+# To enable immediate player respawn.
+enable-immediate-respawn: true
+
+# ---[ Fly Section ]--- #
+
+# To disable the usage of the /fly command.
+enable-fly-command: true
+
+# To change the message when enabling flying.
+fly-on-message: "&aEnabled Fly!"
+
+# To change the message when disabling flying.
+fly-off-message: "&cDisabled Fly!"
+
+# ---[ Particle Section ]--- #
+
+# To change the message when enabling a particle trail.
+particle-trail-on-message: "&aEnabled Particle Trail!"
+
+# To change the message when disabling a particle trail.
+particle-trail-off-message: "&cDisabled Particle Trail!"
+

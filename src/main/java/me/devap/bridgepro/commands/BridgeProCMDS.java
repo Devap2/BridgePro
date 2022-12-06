@@ -58,22 +58,30 @@ public class BridgeProCMDS implements CommandExecutor {
                 else {
                     if (args[0].equalsIgnoreCase("set-spawn")) {
 
-                        Location location = p.getLocation();
-
-                        p.sendMessage(ChatColor.GREEN + "Successfully set the bridge spawn location.");
-
                         // Getting the configuration file and setting the location values.
-                        main.getConfig().set("bridge-lobby-location.World-name", Objects.requireNonNull(location.getWorld()).getName());
-                        main.getConfig().set("bridge-lobby-location.X", location.getX());
-                        main.getConfig().set("bridge-lobby-location.Y", location.getY());
-                        main.getConfig().set("bridge-lobby-location.Z", location.getZ());
-                        main.getConfig().set("bridge-lobby-location.Yaw", location.getYaw());
-                        main.getConfig().set("bridge-lobby-location.Pitch", location.getPitch());
+                        //main.getConfig().set("bridge-lobby-location.World-name", Objects.requireNonNull(location.getWorld()).getName());
+                        //main.getConfig().set("bridge-lobby-location.X", location.getX());
+                        //main.getConfig().set("bridge-lobby-location.Y", location.getY());
+                        //main.getConfig().set("bridge-lobby-location.Z", location.getZ());
+                        //main.getConfig().set("bridge-lobby-location.Yaw", location.getYaw());
+                        //main.getConfig().set("bridge-lobby-location.Pitch", location.getPitch());
 
-                        // Saving the changes made in the configuration file.
-                        main.getConfig().options().copyDefaults(true);
-                        main.saveConfig();
-                    } else if (args[0].equalsIgnoreCase("particles")) {
+                        if (sender instanceof Player){
+                            Location location = p.getLocation();
+                            Player player = (Player) sender;
+
+                            main.getConfig().set("bridge-lobby-location", location);
+                            p.sendMessage(ChatColor.GREEN + "Successfully set the bridge spawn location.");
+
+                            // Saving the changes made in the configuration file.
+                            main.getConfig().options().copyDefaults(true);
+                            main.saveConfig();
+
+                        }else{
+                            System.out.println("You must be a player to execute this command.");
+                        }
+                    }
+                    else if (args[0].equalsIgnoreCase("particles")) {
 
                             Inventory particleGUI = Bukkit.createInventory(p, 36, ChatColor.DARK_RED + "Particle Selector");
 
@@ -170,6 +178,83 @@ public class BridgeProCMDS implements CommandExecutor {
                             particleGUI.setItem(31, closeGUI);
 
                             p.openInventory(particleGUI);
+
+                    }
+                    else if (args[0].equalsIgnoreCase("block-selector")) {
+
+                        Inventory blockGUI = Bukkit.createInventory(p, 36, ChatColor.BLUE + "Block Selector");
+
+                        // The item stacks for in the particles.
+                        ItemStack grayBlock = new ItemStack(Material.GRAY_TERRACOTTA);
+                        ItemStack greenBlock = new ItemStack(Material.GREEN_TERRACOTTA);
+                        ItemStack cyanBlock = new ItemStack(Material.CYAN_TERRACOTTA);
+                        ItemStack purpleBlock = new ItemStack(Material.PURPLE_TERRACOTTA);
+                        ItemStack redBlock = new ItemStack(Material.RED_TERRACOTTA);
+                        ItemStack closeGUI = new ItemStack(Material.REDSTONE);
+
+                        // Setting the gray block particle meta/lore.
+                        ItemMeta grayBlockMeta = grayBlock.getItemMeta();
+                        assert grayBlockMeta != null;
+                        grayBlockMeta.setDisplayName(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Gray block");
+                        ArrayList<String> grayBlockLore = new ArrayList<>();
+                        grayBlockLore.add(ChatColor.GRAY + "Selects the gray block.");
+                        grayBlockMeta.setLore(grayBlockLore);
+                        grayBlock.setItemMeta(grayBlockMeta);
+
+                        // Setting the green block particle meta/lore.
+                        ItemMeta greenBlockMeta = greenBlock.getItemMeta();
+                        assert greenBlockMeta != null;
+                        greenBlockMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Green block");
+                        ArrayList<String> greenBlockLore = new ArrayList<>();
+                        greenBlockLore.add(ChatColor.GRAY + "Selects the green block.");
+                        greenBlockMeta.setLore(greenBlockLore);
+                        greenBlock.setItemMeta(greenBlockMeta);
+
+                        // Setting the cyan block meta/lore.
+                        ItemMeta cyanBlockMeta = cyanBlock.getItemMeta();
+                        assert cyanBlockMeta != null;
+                        cyanBlockMeta.setDisplayName(ChatColor.BLUE + "" + ChatColor.BOLD + "Cyan block");
+                        ArrayList<String> cyanBlockLore = new ArrayList<>();
+                        cyanBlockLore.add(ChatColor.GRAY + "Selects the cyan block.");
+                        cyanBlockMeta.setLore(cyanBlockLore);
+                        cyanBlock.setItemMeta(cyanBlockMeta);
+
+                        // Setting the purple block meta/lore.
+                        ItemMeta purpleBlockMeta = purpleBlock.getItemMeta();
+                        assert purpleBlockMeta != null;
+                        purpleBlockMeta.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Purple block");
+                        ArrayList<String> purpleBlockLore = new ArrayList<>();
+                        purpleBlockLore.add(ChatColor.GRAY + "Selects the purple block.");
+                        purpleBlockMeta.setLore(purpleBlockLore);
+                        purpleBlock.setItemMeta(purpleBlockMeta);
+
+                        // Setting the red block meta/lore.
+                        ItemMeta redBlockMeta = redBlock.getItemMeta();
+                        assert redBlockMeta != null;
+                        redBlockMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Red block");
+                        ArrayList<String> redBlockLore = new ArrayList<>();
+                        redBlockLore.add(ChatColor.GRAY + "Selects the red block.");
+                        redBlockMeta.setLore(redBlockLore);
+                        redBlock.setItemMeta(redBlockMeta);
+
+                        // Setting the close menu meta/lore.
+                        ItemMeta closeGUIMeta = closeGUI.getItemMeta();
+                        assert closeGUIMeta != null;
+                        closeGUIMeta.setDisplayName(ChatColor.DARK_GRAY + "Close Menu");
+                        ArrayList<String> closeGUILore = new ArrayList<>();
+                        closeGUILore.add(ChatColor.GRAY + "Left click to leave the menu.");
+                        closeGUIMeta.setLore(closeGUILore);
+                        closeGUI.setItemMeta(closeGUIMeta);
+
+                        // Setting the items in the gui.
+                        blockGUI.setItem(11, grayBlock);
+                        blockGUI.setItem(12, greenBlock);
+                        blockGUI.setItem(13, cyanBlock);
+                        blockGUI.setItem(14, purpleBlock);
+                        blockGUI.setItem(15, redBlock);
+                        blockGUI.setItem(31, closeGUI);
+
+                        p.openInventory(blockGUI);
 
                     }
                     else if (args[0].equalsIgnoreCase("set-boundary-one")) {

@@ -5,12 +5,12 @@
 # Change the default lobby spawn location.
 # (You can use '/bp set-spawn' to set the lobby location in game.)
 bridge-lobby-location:
-  World-name:
-  X:
-  Y:
-  Z:
-  Yaw:
-  Pitch:
+  world:
+  x:
+  y:
+  z:
+  pitch:
+  yaw:
 
 # To set the first game boundary.
 # (You can use '/bp set-boundary-one' to set the lobby location in game.)
@@ -50,9 +50,6 @@ enable-sound-on-join: true
 # To disable the player fall damage.
 disable-fall-damage: true
 
-# To disable the player hunger.
-disable-hunger: true
-
 # To disable the weather from changing.
 disable-weather-change: true
 
@@ -79,6 +76,9 @@ disable-block-breaking: true
 
 # To enable immediate player respawn.
 enable-immediate-respawn: true
+
+# To disable the player hunger.
+disable-hunger: false
 
 # ---[ Particle Section ]--- #
 

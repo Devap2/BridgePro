@@ -28,16 +28,8 @@ public class OnBlockPlace implements Listener {
             new BukkitRunnable() {
                 public void run() {
                     // If the player is in-game, not in creative and placed a stone block. Set to air after ... seconds.
-                    if(plugin.ingame.contains(p)){
-                        if(!p.getGameMode().equals(GameMode.CREATIVE)){
-                            if(placedBlock.getType().equals(Material.STONE)){
-                                e.getPlayer().spawnParticle(Particle.BLOCK_DUST,placedBlock.getLocation(),30,placedBlock.getBlockData());
-                                placedBlock.setType(Material.AIR);
-                            }
-                        }
-                    }
-                    if(!p.isOnline()){
-                        if(placedBlock.getType().equals(Material.STONE)){
+                    if(!p.getGameMode().equals(GameMode.CREATIVE)){
+                        if (placedBlock.getType().equals(Material.LIGHT_GRAY_WOOL)){
                             e.getPlayer().spawnParticle(Particle.BLOCK_DUST,placedBlock.getLocation(),30,placedBlock.getBlockData());
                             placedBlock.setType(Material.AIR);
                         }

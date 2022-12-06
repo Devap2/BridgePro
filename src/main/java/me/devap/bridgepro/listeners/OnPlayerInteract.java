@@ -83,16 +83,34 @@ public class OnPlayerInteract implements Listener {
 
                         /* Getting the correct lobby location for the player to spawn to on join. */
 
-                        // Getting the lobby location from the configuration file and teleporting the player to that location.
-                        double lobbyLocX = (double) main.getConfig().getDouble("bridge-lobby-location.X");
-                        double lobbyLocY = (double) main.getConfig().getDouble("bridge-lobby-location.Y");
-                        double lobbyLocZ = (double) main.getConfig().getDouble("bridge-lobby-location.Z");
+                        Location bridgeLobbyLocation = main.getConfig().getLocation("bridge-lobby-location");
 
-                        // Creating the lobby location.
-                        Location bridgeLobbyLocation = new Location(p.getWorld(), lobbyLocX, lobbyLocY, lobbyLocZ);
+                        if(bridgeLobbyLocation != null){
+                            // Sending the player to lobby location.
+                            p.teleport(bridgeLobbyLocation);
+                        }
+                        else{
+                            p.sendMessage(ChatColor.RED + "Lobby location for bridge has not been set yet.");
+                            p.sendMessage(ChatColor.GRAY + "Try: '/bp set-spawn' to set the spawn location.");
+                        }
+                    }
+                }
+            }
+        }
+        else if (p.getInventory().getItemInMainHand().getType() == Material.DIAMOND) {
+            if (Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.AQUA + "" + org.bukkit.ChatColor.BOLD + "Block Selector")) {
 
-                        // Sending the player to lobby location.
-                        p.teleport(bridgeLobbyLocation);
+                // Checking if the player action is equals to right-clicking air.
+                if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+
+                    EquipmentSlot slot = e.getHand();
+
+                    // Get the slot, so that it doesn't call twice.
+                    assert slot != null;
+                    if (slot.equals(EquipmentSlot.HAND)) {
+
+                        p.performCommand("bp block-selector");
+
                     }
                 }
             }

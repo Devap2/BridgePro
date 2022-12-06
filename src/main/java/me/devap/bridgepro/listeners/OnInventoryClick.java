@@ -37,21 +37,21 @@ public class OnInventoryClick implements Listener {
         Player p = (Player) e.getWhoClicked();
 
         // Cancelling the ability of moving items in the inventory.
-        if(e.getWhoClicked() instanceof Player && e.getClickedInventory() != null) {
+        if (e.getWhoClicked() instanceof Player && e.getClickedInventory() != null) {
             List<ItemStack> items = new ArrayList<>();
             items.add(e.getCurrentItem());
             items.add(e.getCursor());
             // Disabling the number_key event on inventory click.
             items.add((e.getClick() == org.bukkit.event.inventory.ClickType.NUMBER_KEY) ? e.getWhoClicked().getInventory().getItem(e.getHotbarButton()) : e.getCurrentItem());
             // if the ItemStack has one of the events above, set cancelled.
-            for(ItemStack item : items) {
-                if(item != null && item.hasItemMeta()) {
+            for (ItemStack item : items) {
+                if (item != null && item.hasItemMeta()) {
                     e.setCancelled(true);
                 }
             }
         }
         // Checking if the clicked person is op, or is in creative mode.
-        if(e.getWhoClicked().isOp() && e.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)){
+        if (e.getWhoClicked().isOp() && e.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(false);
         }
 
@@ -62,324 +62,269 @@ public class OnInventoryClick implements Listener {
         // NOTE: THE CODE UNDERNEATH IS VERY BAD AND INEFFICIENT. DON'T REPLICATE THIS... I WILL RECODE THIS PART LATER.
 
         // Checking if the menu title == Particle Selector, then checking the slots
-        if(view.getTitle().equalsIgnoreCase(ChatColor.DARK_RED + "Particle Selector")){
+        if (view.getTitle().equalsIgnoreCase(ChatColor.DARK_RED + "Particle Selector")) {
             // Checking the slot and the item, if correct, execute.
-            if(e.getSlot() == 10){
-                if(Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.REDSTONE_TORCH)){
-                    if(e.getClick().isLeftClick()){
+            if (e.getSlot() == 10) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.REDSTONE_TORCH)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
 
                         if (redstoneParticleList.contains(p)) {
                             redstoneParticleList.remove(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-off-message"))));
-                        }
-                        else if(heartParticleList.contains(p)){
+                        } else if (heartParticleList.contains(p)) {
                             heartParticleList.remove(p);
                             redstoneParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(waterParticleList.contains(p)){
+                        } else if (waterParticleList.contains(p)) {
                             waterParticleList.remove(p);
                             redstoneParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(lavaParticleList.contains(p)){
+                        } else if (lavaParticleList.contains(p)) {
                             lavaParticleList.remove(p);
                             redstoneParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(potionParticleList.contains(p)){
+                        } else if (potionParticleList.contains(p)) {
                             potionParticleList.remove(p);
                             redstoneParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(snowParticleList.contains(p)){
+                        } else if (snowParticleList.contains(p)) {
                             snowParticleList.remove(p);
                             redstoneParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(musicParticleList.contains(p)){
+                        } else if (musicParticleList.contains(p)) {
                             musicParticleList.remove(p);
                             redstoneParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else{
+                        } else {
                             redstoneParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
                         }
                     }
                 }
-            }
-            else if(e.getSlot() == 11){
-                if(Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.RED_DYE)){
-                    if(e.getClick().isLeftClick()){
+            } else if (e.getSlot() == 11) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.RED_DYE)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
 
                         if (heartParticleList.contains(p)) {
                             heartParticleList.remove(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-off-message"))));
-                        }
-                        else if(redstoneParticleList.contains(p)){
+                        } else if (redstoneParticleList.contains(p)) {
                             redstoneParticleList.remove(p);
                             heartParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(waterParticleList.contains(p)){
+                        } else if (waterParticleList.contains(p)) {
                             waterParticleList.remove(p);
                             heartParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(lavaParticleList.contains(p)){
+                        } else if (lavaParticleList.contains(p)) {
                             lavaParticleList.remove(p);
                             heartParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(potionParticleList.contains(p)){
+                        } else if (potionParticleList.contains(p)) {
                             potionParticleList.remove(p);
                             heartParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(snowParticleList.contains(p)){
+                        } else if (snowParticleList.contains(p)) {
                             snowParticleList.remove(p);
                             heartParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(musicParticleList.contains(p)){
+                        } else if (musicParticleList.contains(p)) {
                             musicParticleList.remove(p);
                             heartParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else{
+                        } else {
                             heartParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
                         }
                     }
                 }
-            }
-            else if(e.getSlot() == 12){
-                if(Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.WATER_BUCKET)){
-                    if(e.getClick().isLeftClick()){
+            } else if (e.getSlot() == 12) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.WATER_BUCKET)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
 
                         if (waterParticleList.contains(p)) {
                             waterParticleList.remove(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-off-message"))));
-                        }
-                        else if(heartParticleList.contains(p)){
+                        } else if (heartParticleList.contains(p)) {
                             heartParticleList.remove(p);
                             waterParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(redstoneParticleList.contains(p)){
+                        } else if (redstoneParticleList.contains(p)) {
                             redstoneParticleList.remove(p);
                             waterParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(lavaParticleList.contains(p)){
+                        } else if (lavaParticleList.contains(p)) {
                             lavaParticleList.remove(p);
                             waterParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(potionParticleList.contains(p)){
+                        } else if (potionParticleList.contains(p)) {
                             potionParticleList.remove(p);
                             waterParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(snowParticleList.contains(p)){
+                        } else if (snowParticleList.contains(p)) {
                             snowParticleList.remove(p);
                             waterParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(musicParticleList.contains(p)){
+                        } else if (musicParticleList.contains(p)) {
                             musicParticleList.remove(p);
                             waterParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else{
+                        } else {
                             waterParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
                         }
                     }
                 }
-            }
-            else if(e.getSlot() == 13){
-                if(Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.LAVA_BUCKET)){
-                    if(e.getClick().isLeftClick()){
+            } else if (e.getSlot() == 13) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.LAVA_BUCKET)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
 
                         if (lavaParticleList.contains(p)) {
                             lavaParticleList.remove(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-off-message"))));
-                        }
-                        else if(heartParticleList.contains(p)){
+                        } else if (heartParticleList.contains(p)) {
                             heartParticleList.remove(p);
                             lavaParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(waterParticleList.contains(p)){
+                        } else if (waterParticleList.contains(p)) {
                             waterParticleList.remove(p);
                             lavaParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(redstoneParticleList.contains(p)){
+                        } else if (redstoneParticleList.contains(p)) {
                             redstoneParticleList.remove(p);
                             lavaParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(potionParticleList.contains(p)){
+                        } else if (potionParticleList.contains(p)) {
                             potionParticleList.remove(p);
                             lavaParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(snowParticleList.contains(p)){
+                        } else if (snowParticleList.contains(p)) {
                             snowParticleList.remove(p);
                             lavaParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(musicParticleList.contains(p)){
+                        } else if (musicParticleList.contains(p)) {
                             musicParticleList.remove(p);
                             lavaParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else{
+                        } else {
                             lavaParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
                         }
                     }
                 }
-            }
-            else if(e.getSlot() == 14){
-                if(Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.POTION)){
-                    if(e.getClick().isLeftClick()){
+            } else if (e.getSlot() == 14) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.POTION)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
 
                         if (potionParticleList.contains(p)) {
                             potionParticleList.remove(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-off-message"))));
-                        }
-                        else if(heartParticleList.contains(p)){
+                        } else if (heartParticleList.contains(p)) {
                             heartParticleList.remove(p);
                             potionParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(waterParticleList.contains(p)){
+                        } else if (waterParticleList.contains(p)) {
                             waterParticleList.remove(p);
                             potionParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(redstoneParticleList.contains(p)){
+                        } else if (redstoneParticleList.contains(p)) {
                             redstoneParticleList.remove(p);
                             potionParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(lavaParticleList.contains(p)){
+                        } else if (lavaParticleList.contains(p)) {
                             lavaParticleList.remove(p);
                             potionParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(snowParticleList.contains(p)){
+                        } else if (snowParticleList.contains(p)) {
                             snowParticleList.remove(p);
                             potionParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(musicParticleList.contains(p)){
+                        } else if (musicParticleList.contains(p)) {
                             musicParticleList.remove(p);
                             potionParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else{
+                        } else {
                             potionParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
                         }
                     }
                 }
-            }
-            else if(e.getSlot() == 15){
-                if(Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.SNOWBALL)){
-                    if(e.getClick().isLeftClick()){
+            } else if (e.getSlot() == 15) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.SNOWBALL)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
 
                         if (snowParticleList.contains(p)) {
                             snowParticleList.remove(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-off-message"))));
-                        }
-                        else if(heartParticleList.contains(p)){
+                        } else if (heartParticleList.contains(p)) {
                             heartParticleList.remove(p);
                             snowParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(waterParticleList.contains(p)){
+                        } else if (waterParticleList.contains(p)) {
                             waterParticleList.remove(p);
                             snowParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(redstoneParticleList.contains(p)){
+                        } else if (redstoneParticleList.contains(p)) {
                             redstoneParticleList.remove(p);
                             snowParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if (potionParticleList.contains(p)) {
+                        } else if (potionParticleList.contains(p)) {
                             potionParticleList.remove(p);
                             snowParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(lavaParticleList.contains(p)){
+                        } else if (lavaParticleList.contains(p)) {
                             lavaParticleList.remove(p);
                             snowParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(musicParticleList.contains(p)){
+                        } else if (musicParticleList.contains(p)) {
                             musicParticleList.remove(p);
                             snowParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else {
+                        } else {
                             snowParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
                         }
                     }
                 }
-            }
-            else if(e.getSlot() == 16){
-                if(Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.NOTE_BLOCK)){
-                    if(e.getClick().isLeftClick()){
+            } else if (e.getSlot() == 16) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.NOTE_BLOCK)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
 
                         if (musicParticleList.contains(p)) {
                             musicParticleList.remove(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-off-message"))));
-                        }
-                        else if(heartParticleList.contains(p)){
+                        } else if (heartParticleList.contains(p)) {
                             heartParticleList.remove(p);
                             musicParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(waterParticleList.contains(p)){
+                        } else if (waterParticleList.contains(p)) {
                             waterParticleList.remove(p);
                             musicParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(redstoneParticleList.contains(p)){
+                        } else if (redstoneParticleList.contains(p)) {
                             redstoneParticleList.remove(p);
                             musicParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if (potionParticleList.contains(p)) {
+                        } else if (potionParticleList.contains(p)) {
                             potionParticleList.remove(p);
                             musicParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(lavaParticleList.contains(p)){
+                        } else if (lavaParticleList.contains(p)) {
                             lavaParticleList.remove(p);
                             musicParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else if(snowParticleList.contains(p)){
+                        } else if (snowParticleList.contains(p)) {
                             snowParticleList.remove(p);
                             musicParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
-                        }
-                        else {
+                        } else {
                             musicParticleList.add(p);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("particle-trail-on-message"))));
                         }
@@ -389,7 +334,61 @@ public class OnInventoryClick implements Listener {
             // Close inventory button.
             else if (e.getSlot() == 31) {
                 if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.REDSTONE)) {
-                    if(e.getClick().isLeftClick()) {
+                    if (e.getClick().isLeftClick()) {
+                        p.closeInventory();
+                    }
+                }
+            }
+        }
+
+        /* ---------- BLOCK SELECTOR MENU SECTION ---------- */
+
+        else if (view.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Block Selector")) {
+            // Checking the slot and the item, if correct, execute.
+            if (e.getSlot() == 11) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.GRAY_TERRACOTTA)) {
+                    if (e.getClick().isLeftClick()) {
+                        p.closeInventory();
+                        p.sendMessage(ChatColor.GREEN + "Gray terracotta selected.");
+                    }
+                }
+            }
+            else if (e.getSlot() == 12) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.GREEN_TERRACOTTA)) {
+                    if (e.getClick().isLeftClick()) {
+                        p.closeInventory();
+                        p.sendMessage(ChatColor.GREEN + "Green terracotta selected.");
+                    }
+                }
+            }
+            else if (e.getSlot() == 13) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.CYAN_TERRACOTTA)) {
+                    if (e.getClick().isLeftClick()) {
+                        p.closeInventory();
+                        p.sendMessage(ChatColor.GREEN + "Cyan terracotta selected.");
+                    }
+                }
+            }
+            else if (e.getSlot() == 14) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.PURPLE_TERRACOTTA)) {
+                    if (e.getClick().isLeftClick()) {
+                        p.closeInventory();
+                        p.sendMessage(ChatColor.GREEN + "Purple terracotta selected.");
+                    }
+                }
+            }
+            else if (e.getSlot() == 15) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.RED_TERRACOTTA)) {
+                    if (e.getClick().isLeftClick()) {
+                        p.closeInventory();
+                        p.sendMessage(ChatColor.GREEN + "Red terracotta selected.");
+                    }
+                }
+            }
+            // Close inventory button.
+            else if (e.getSlot() == 31) {
+                if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.REDSTONE)) {
+                    if (e.getClick().isLeftClick()) {
                         p.closeInventory();
                     }
                 }

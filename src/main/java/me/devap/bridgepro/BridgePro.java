@@ -14,6 +14,7 @@ import java.util.*;
 
 public final class BridgePro extends JavaPlugin {
 
+    // The lobby or in-game array lists.
     public ArrayList<Player> lobby = new ArrayList<>();
     public ArrayList<Player> ingame = new ArrayList<>();
 
@@ -71,7 +72,7 @@ public final class BridgePro extends JavaPlugin {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
         // Creating the list of strings
-        List<String> list = Arrays.asList("help", "set-spawn", "updates", "reload", "info", "version", "particles", "set-boundary-one", "set-boundary-two");
+        List<String> list = Arrays.asList("help", "set-spawn", "updates", "reload", "info", "version", "particles", "block-selector", "set-boundary-one", "set-boundary-two");
         String input = args[0].toLowerCase();
 
         List<String> completions = null;

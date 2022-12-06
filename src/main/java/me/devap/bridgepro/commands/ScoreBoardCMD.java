@@ -1,6 +1,7 @@
 package me.devap.bridgepro.commands;
 
 import me.devap.bridgepro.BridgePro;
+import me.devap.bridgepro.listeners.OnPlayerDeath;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
@@ -23,6 +24,16 @@ public class ScoreBoardCMD implements CommandExecutor {
 
         Player p = (Player) sender;
         String pname = p.getName();
+
+        int pKills = p.getStatistic(Statistic.PLAYER_KILLS);
+        int pDeaths = p.getStatistic(Statistic.DEATHS);
+
+        double finalkills = p.getStatistic(Statistic.PLAYER_KILLS);
+        double finaldeaths = p.getStatistic(Statistic.DEATHS);
+
+        double kd = finalkills/finaldeaths;
+        String kd_result = String.format("%.2f", kd);
+
         int onlinePlayers = plugin.getServer().getOnlinePlayers().size();
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         assert manager != null;
@@ -36,10 +47,10 @@ public class ScoreBoardCMD implements CommandExecutor {
         // Setting the different scores to text.
         Score s1 = objective.getScore("");
         Score s2 = objective.getScore(ChatColor.GOLD + "Name: " + ChatColor.GRAY + pname);
-        Score s3 = objective.getScore(ChatColor.GOLD + "Rank: " + ChatColor.GRAY + "Default");
-        Score s4 = objective.getScore(ChatColor.GOLD + "Kills: " + ChatColor.GRAY + p.getStatistic(Statistic.PLAYER_KILLS));
-        Score s5 = objective.getScore(ChatColor.GOLD + "Deaths: " + ChatColor.GRAY + p.getStatistic(Statistic.DEATHS));
-        Score s6 = objective.getScore(ChatColor.GOLD + "K/D: " + ChatColor.GRAY + "1");
+        Score s3 = objective.getScore(ChatColor.GOLD + "Kills: " + ChatColor.GRAY + pKills);
+        Score s4 = objective.getScore(ChatColor.GOLD + "Deaths: " + ChatColor.GRAY + pDeaths);
+        Score s5 = objective.getScore(ChatColor.GOLD + "K/D: " + ChatColor.GRAY + kd_result);
+        Score s6 = objective.getScore(ChatColor.GOLD + "Kill-streak: " + ChatColor.GRAY + "0");
         Score s7 = objective.getScore(" ");
         Score s8 = objective.getScore(ChatColor.GOLD + "Players: " + ChatColor.GRAY + onlinePlayers);
         Score s9 = objective.getScore("  ");

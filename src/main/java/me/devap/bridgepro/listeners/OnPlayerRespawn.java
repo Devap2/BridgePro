@@ -29,13 +29,7 @@ public class OnPlayerRespawn implements Listener {
 
             /* Getting the correct lobby location for the player to spawn to on join. */
 
-            // Getting the lobby location from the configuration file and teleporting the player to that location.
-            double lobbyLocX = (double) plugin.getConfig().getDouble("bridge-lobby-location.X");
-            double lobbyLocY = (double) plugin.getConfig().getDouble("bridge-lobby-location.Y");
-            double lobbyLocZ = (double) plugin.getConfig().getDouble("bridge-lobby-location.Z");
-
-            // Creating the lobby location.
-            Location bridgeLobbyLocation = new Location(p.getWorld(), lobbyLocX, lobbyLocY, lobbyLocZ);
+            Location bridgeLobbyLocation = plugin.getConfig().getLocation("bridge-lobby-location");
 
             // Sending the player to lobby location if true in config.
             if (bridgeLobbyLocation != null) {
@@ -74,13 +68,13 @@ public class OnPlayerRespawn implements Listener {
                     particleSelectorMeta.setLore(Arrays.asList(org.bukkit.ChatColor.GRAY + "Right click to open the particle selector menu.", org.bukkit.ChatColor.GRAY + "New: redstone, cloud and coal!"));
                     particleSelector.setItemMeta(particleSelectorMeta);
 
-                    // Quick Respawn ItemStack + ItemMeta
-                    /*ItemStack quickRespawn = new ItemStack(Material.CLOCK);
-                    ItemMeta quickRespawnMeta = quickRespawn.getItemMeta();
-                    assert quickRespawnMeta != null;
-                    quickRespawnMeta.setDisplayName(org.bukkit.ChatColor.DARK_RED + "" + org.bukkit.ChatColor.BOLD + "Quick Spawn");
-                    quickRespawnMeta.setLore(Collections.singletonList(org.bukkit.ChatColor.GRAY + "Richt Click To Respawn At The Bridge Spawn Location."));
-                    quickRespawn.setItemMeta(quickRespawnMeta);*/
+                    // Block Selector ItemStack + ItemMeta
+                    ItemStack block = new ItemStack(Material.DIAMOND);
+                    ItemMeta blockMeta = block.getItemMeta();
+                    assert blockMeta != null;
+                    blockMeta.setDisplayName(org.bukkit.ChatColor.AQUA + "" + org.bukkit.ChatColor.BOLD + "Block Selector");
+                    blockMeta.setLore(Collections.singletonList(org.bukkit.ChatColor.GRAY + "Right click to choose a block type."));
+                    block.setItemMeta(blockMeta);
 
                     // Go To Spawn ItemStack + ItemMeta
                     ItemStack spawn = new ItemStack(Material.PAPER);
@@ -103,7 +97,7 @@ public class OnPlayerRespawn implements Listener {
                     // Giving the player the items
                     p.getInventory().setItem(0, settings);
                     p.getInventory().setItem(1, particleSelector);
-                    //p.getInventory().setItem(4, quickRespawn);
+                    p.getInventory().setItem(4, block);
                     p.getInventory().setItem(7, spawn);
                     p.getInventory().setItem(8, infoBook);
                 }

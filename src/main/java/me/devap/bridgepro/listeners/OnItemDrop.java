@@ -22,12 +22,12 @@ public class OnItemDrop implements Listener {
 
         Player p = e.getPlayer();
 
-        if(plugin.ingame.contains(p)){
-
+        if(plugin.lobby.contains(p) || plugin.ingame.contains(p)){
             //Checking if the dropped item is equal to an emerald, paper, fire-charge or book.
             if(e.getItemDrop().getItemStack().getType().equals(Material.EMERALD) ||
                     (e.getItemDrop().getItemStack().getType().equals(Material.PAPER)) ||
-                    (e.getItemDrop().getItemStack().getType().equals(Material.FIRE_CHARGE)) ||
+                    (e.getItemDrop().getItemStack().getType().equals(Material.BLAZE_ROD)) ||
+                    (e.getItemDrop().getItemStack().getType().equals(Material.DIAMOND)) ||
                     (e.getItemDrop().getItemStack().getType().equals(Material.BOOK))) {
                 e.setCancelled(true);
             }

@@ -56,7 +56,6 @@ public class OnPlayerMove implements Listener {
                         p.setFireTicks(0);
 
                         // Giving the player the blocks for in-game.
-                        ItemStack blocks = new ItemStack(Material.LIGHT_GRAY_WOOL, 64);
                         ItemStack weapon = new ItemStack(Material.STICK, 1);
                         ItemStack bow = new ItemStack(Material.BOW, 1);
                         ItemStack arrows = new ItemStack(Material.ARROW, 32);
@@ -68,7 +67,7 @@ public class OnPlayerMove implements Listener {
                         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
 
                         // Adding the enchantments to the items
-                        weapon.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+                        //weapon.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
                         weapon.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 
                         // Adding the player armour
@@ -80,12 +79,6 @@ public class OnPlayerMove implements Listener {
                         p.getInventory().setItem(0, weapon);
                         p.getInventory().setItem(1, bow);
                         p.getInventory().setItem(2, food);
-                        p.getInventory().setItem(3, blocks);
-                        p.getInventory().setItem(4, blocks);
-                        p.getInventory().setItem(5, blocks);
-                        p.getInventory().setItem(6, blocks);
-                        p.getInventory().setItem(7, blocks);
-                        p.getInventory().setItem(8, blocks);
                         p.getOpenInventory().setItem(9, arrows);
                     }
                 }

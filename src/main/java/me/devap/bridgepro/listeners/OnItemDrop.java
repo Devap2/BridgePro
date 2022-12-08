@@ -31,6 +31,9 @@ public class OnItemDrop implements Listener {
                     (e.getItemDrop().getItemStack().getType().equals(Material.BOOK))) {
                 e.setCancelled(true);
             }
+            else if(e.getItemDrop().getItemStack().getType().equals(Material.STICK) && e.getItemDrop().getItemStack().hasItemMeta()){
+                e.setCancelled(true);
+            }
         }
 
     }

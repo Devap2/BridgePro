@@ -1,6 +1,7 @@
 package me.devap.bridgepro.listeners;
 
 import me.devap.bridgepro.BridgePro;
+import org.bukkit.GameMode;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,9 +24,20 @@ public class OnItemPickUp implements Listener {
         // Disable players from picking up items when in lobby or in-game.
         if(e.getEntityType().equals(EntityType.PLAYER)){
             if(plugin.ingame.contains(p) || plugin.lobby.contains(p)){
-                if(plugin.getConfig().getBoolean("disable-item-pick-up")){
-                    e.setCancelled(true);
+                if(!p.getGameMode().equals(GameMode.CREATIVE)){
+                    if(plugin.getConfig().getBoolean("disable-item-pick-up")){
+                        e.setCancelled(true);
+                    }
+                    else{
+                        e.setCancelled(false);
+                    }
                 }
+            }
+        }
+
+        if(plugin.lobby.contains(p)){
+            if(!p.getGameMode().equals(GameMode.CREATIVE)){
+                e.setCancelled(true);
             }
         }
     }

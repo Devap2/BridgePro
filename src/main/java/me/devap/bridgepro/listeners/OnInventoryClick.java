@@ -3,6 +3,7 @@ package me.devap.bridgepro.listeners;
 import me.devap.bridgepro.BridgePro;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +20,7 @@ public class OnInventoryClick implements Listener {
 
     private final BridgePro plugin;
 
+    // Particle type Lists
     public final ArrayList<Player> redstoneParticleList = new ArrayList<>();
     public final ArrayList<Player> heartParticleList = new ArrayList<>();
     public final ArrayList<Player> lavaParticleList = new ArrayList<>();
@@ -26,6 +28,13 @@ public class OnInventoryClick implements Listener {
     public final ArrayList<Player> potionParticleList = new ArrayList<>();
     public final ArrayList<Player> snowParticleList = new ArrayList<>();
     public final ArrayList<Player> musicParticleList = new ArrayList<>();
+
+    // Block type lists
+    public final ArrayList<Player> grayTerracottaList = new ArrayList<>();
+    public final ArrayList<Player> greenTerracottaList = new ArrayList<>();
+    public final ArrayList<Player> cyanTerracottaList = new ArrayList<>();
+    public final ArrayList<Player> purpleTerracottaList = new ArrayList<>();
+    public final ArrayList<Player> redTerracottaList = new ArrayList<>();
 
     public OnInventoryClick(BridgePro plugin) {
         this.plugin = plugin;
@@ -349,7 +358,30 @@ public class OnInventoryClick implements Listener {
                 if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.GRAY_TERRACOTTA)) {
                     if (e.getClick().isLeftClick()) {
                         p.closeInventory();
-                        p.sendMessage(ChatColor.GREEN + "Gray terracotta selected.");
+
+                        if (grayTerracottaList.contains(p)) {
+                            grayTerracottaList.remove(p);
+                            p.sendMessage(ChatColor.RED + "Gray blocks de-selected.");
+                        } else if (greenTerracottaList.contains(p)) {
+                            greenTerracottaList.remove(p);
+                            grayTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Gray blocks selected.");
+                        } else if (cyanTerracottaList.contains(p)) {
+                            cyanTerracottaList.remove(p);
+                            grayTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Gray blocks selected.");
+                        } else if (purpleTerracottaList.contains(p)) {
+                            purpleTerracottaList.remove(p);
+                            grayTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Gray blocks selected.");
+                        } else if (redTerracottaList.contains(p)) {
+                            redTerracottaList.remove(p);
+                            grayTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Gray blocks selected.");
+                        } else {
+                            grayTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Gray blocks selected.");
+                        }
                     }
                 }
             }
@@ -357,7 +389,30 @@ public class OnInventoryClick implements Listener {
                 if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.GREEN_TERRACOTTA)) {
                     if (e.getClick().isLeftClick()) {
                         p.closeInventory();
-                        p.sendMessage(ChatColor.GREEN + "Green terracotta selected.");
+
+                        if (greenTerracottaList.contains(p)) {
+                            greenTerracottaList.remove(p);
+                            p.sendMessage(ChatColor.RED + "Green blocks de-selected.");
+                        } else if (grayTerracottaList.contains(p)) {
+                            grayTerracottaList.remove(p);
+                            greenTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Green blocks selected.");
+                        } else if (cyanTerracottaList.contains(p)) {
+                            cyanTerracottaList.remove(p);
+                            greenTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Green blocks selected.");
+                        } else if (purpleTerracottaList.contains(p)) {
+                            purpleTerracottaList.remove(p);
+                            greenTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Green blocks selected.");
+                        } else if (redTerracottaList.contains(p)) {
+                            redTerracottaList.remove(p);
+                            greenTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Green blocks selected.");
+                        } else {
+                            greenTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Green blocks selected.");
+                        }
                     }
                 }
             }
@@ -365,7 +420,30 @@ public class OnInventoryClick implements Listener {
                 if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.CYAN_TERRACOTTA)) {
                     if (e.getClick().isLeftClick()) {
                         p.closeInventory();
-                        p.sendMessage(ChatColor.GREEN + "Cyan terracotta selected.");
+
+                        if (cyanTerracottaList.contains(p)) {
+                            cyanTerracottaList.remove(p);
+                            p.sendMessage(ChatColor.RED + "Cyan blocks de-selected.");
+                        } else if (grayTerracottaList.contains(p)) {
+                            grayTerracottaList.remove(p);
+                            cyanTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Cyan blocks selected.");
+                        } else if (greenTerracottaList.contains(p)) {
+                            greenTerracottaList.remove(p);
+                            cyanTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Cyan blocks selected.");
+                        } else if (purpleTerracottaList.contains(p)) {
+                            purpleTerracottaList.remove(p);
+                            cyanTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Cyan blocks selected.");
+                        } else if (redTerracottaList.contains(p)) {
+                            redTerracottaList.remove(p);
+                            cyanTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Cyan blocks selected.");
+                        } else {
+                            cyanTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Cyan blocks selected.");
+                        }
                     }
                 }
             }
@@ -373,7 +451,30 @@ public class OnInventoryClick implements Listener {
                 if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.PURPLE_TERRACOTTA)) {
                     if (e.getClick().isLeftClick()) {
                         p.closeInventory();
-                        p.sendMessage(ChatColor.GREEN + "Purple terracotta selected.");
+
+                        if (purpleTerracottaList.contains(p)) {
+                            purpleTerracottaList.remove(p);
+                            p.sendMessage(ChatColor.RED + "Purple blocks de-selected.");
+                        } else if (grayTerracottaList.contains(p)) {
+                            grayTerracottaList.remove(p);
+                            purpleTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Purple blocks selected.");
+                        } else if (greenTerracottaList.contains(p)) {
+                            greenTerracottaList.remove(p);
+                            purpleTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Purple blocks selected.");
+                        } else if (cyanTerracottaList.contains(p)) {
+                            cyanTerracottaList.remove(p);
+                            purpleTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Purple blocks selected.");
+                        } else if (redTerracottaList.contains(p)) {
+                            redTerracottaList.remove(p);
+                            purpleTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Purple blocks selected.");
+                        } else {
+                            purpleTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Purple blocks selected.");
+                        }
                     }
                 }
             }
@@ -381,7 +482,30 @@ public class OnInventoryClick implements Listener {
                 if (Objects.requireNonNull(e.getCurrentItem()).getType().equals(Material.RED_TERRACOTTA)) {
                     if (e.getClick().isLeftClick()) {
                         p.closeInventory();
-                        p.sendMessage(ChatColor.GREEN + "Red terracotta selected.");
+
+                        if (redTerracottaList.contains(p)) {
+                            redTerracottaList.remove(p);
+                            p.sendMessage(ChatColor.RED + "Red blocks de-selected.");
+                        } else if (grayTerracottaList.contains(p)) {
+                            grayTerracottaList.remove(p);
+                            redTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Red blocks selected.");
+                        } else if (greenTerracottaList.contains(p)) {
+                            greenTerracottaList.remove(p);
+                            redTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Red blocks selected.");
+                        } else if (cyanTerracottaList.contains(p)) {
+                            cyanTerracottaList.remove(p);
+                            redTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Red blocks selected.");
+                        } else if (purpleTerracottaList.contains(p)) {
+                            purpleTerracottaList.remove(p);
+                            redTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Red blocks selected.");
+                        } else {
+                            redTerracottaList.add(p);
+                            p.sendMessage(ChatColor.GREEN + "Red blocks selected.");
+                        }
                     }
                 }
             }
@@ -400,6 +524,8 @@ public class OnInventoryClick implements Listener {
     public void onPlayerMove(PlayerMoveEvent e){
         Player p = e.getPlayer();
         World world = p.getWorld();
+
+        /* PARTICLE SECTION */
 
         // When a player is moving and a certain particle is selected in the particle GUI, add the trail.
 
@@ -448,6 +574,120 @@ public class OnInventoryClick implements Listener {
                 // Spawning the particles at the player
                 double note = 6 / 24D; // 6 is the value of the red note
                 p.spawnParticle(Particle.NOTE, p.getLocation(), 0, note, 0, 0, 1);
+            }
+        }
+
+        /* BLOCK SECTION */
+
+        if(plugin.lobby.contains(p)) {
+            if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+                if (Objects.requireNonNull(e.getTo()).getY() < 80) {
+                    if (plugin.getConfig().getLocation("bridge-lobby-location") != null) {
+                        // Do stuff with this player below the y-axis
+                        plugin.ingame.remove(p);
+                        plugin.lobby.remove(p);
+                        plugin.ingame.add(p);
+
+                        p.closeInventory();
+                        p.getOpenInventory().close();
+                        p.getInventory().clear();
+                        p.setFireTicks(0);
+
+                        // Giving the player the blocks for in-game.
+                        ItemStack weapon = new ItemStack(Material.STICK, 1);
+                        ItemStack bow = new ItemStack(Material.BOW, 1);
+                        ItemStack arrows = new ItemStack(Material.ARROW, 32);
+                        ItemStack food = new ItemStack(Material.COOKED_BEEF, 32);
+
+                        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+                        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+                        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
+                        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+
+                        // Adding the enchantments to the items
+                        //weapon.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+                        weapon.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
+
+                        // Adding the player armour
+                        p.getInventory().setHelmet(helmet);
+                        p.getInventory().setChestplate(chestplate);
+                        p.getInventory().setLeggings(leggings);
+                        p.getInventory().setBoots(boots);
+
+                        p.getInventory().setItem(0, weapon);
+                        p.getInventory().setItem(1, bow);
+                        p.getInventory().setItem(8, food);
+                        p.getOpenInventory().setItem(9, arrows);
+
+                        if (grayTerracottaList.contains(p)) {
+
+                            ItemStack grayBlocks = new ItemStack(Material.LIGHT_GRAY_WOOL, 64);
+
+                            p.getInventory().setItem(2, grayBlocks);
+                            p.getInventory().setItem(3, grayBlocks);
+                            p.getInventory().setItem(4, grayBlocks);
+                            p.getInventory().setItem(5, grayBlocks);
+                            p.getInventory().setItem(6, grayBlocks);
+                            p.getInventory().setItem(7, grayBlocks);
+
+                        } else if (greenTerracottaList.contains(p)) {
+
+                            ItemStack greenBlocks = new ItemStack(Material.GREEN_WOOL, 64);
+
+                            p.getInventory().setItem(2, greenBlocks);
+                            p.getInventory().setItem(3, greenBlocks);
+                            p.getInventory().setItem(4, greenBlocks);
+                            p.getInventory().setItem(5, greenBlocks);
+                            p.getInventory().setItem(6, greenBlocks);
+                            p.getInventory().setItem(7, greenBlocks);
+
+                        } else if (cyanTerracottaList.contains(p)) {
+
+                            ItemStack cyanBlocks = new ItemStack(Material.CYAN_WOOL, 64);
+
+                            p.getInventory().setItem(2, cyanBlocks);
+                            p.getInventory().setItem(3, cyanBlocks);
+                            p.getInventory().setItem(4, cyanBlocks);
+                            p.getInventory().setItem(5, cyanBlocks);
+                            p.getInventory().setItem(6, cyanBlocks);
+                            p.getInventory().setItem(7, cyanBlocks);
+
+                        } else if (purpleTerracottaList.contains(p)) {
+
+                            ItemStack purpleBlocks = new ItemStack(Material.PURPLE_WOOL, 64);
+
+                            p.getInventory().setItem(2, purpleBlocks);
+                            p.getInventory().setItem(3, purpleBlocks);
+                            p.getInventory().setItem(4, purpleBlocks);
+                            p.getInventory().setItem(5, purpleBlocks);
+                            p.getInventory().setItem(6, purpleBlocks);
+                            p.getInventory().setItem(7, purpleBlocks);
+
+                        } else if (redTerracottaList.contains(p)) {
+
+                            ItemStack redBlocks = new ItemStack(Material.RED_WOOL, 64);
+
+                            p.getInventory().setItem(2, redBlocks);
+                            p.getInventory().setItem(3, redBlocks);
+                            p.getInventory().setItem(4, redBlocks);
+                            p.getInventory().setItem(5, redBlocks);
+                            p.getInventory().setItem(6, redBlocks);
+                            p.getInventory().setItem(7, redBlocks);
+
+                        } else {
+
+                            ItemStack grayBlocks = new ItemStack(Material.LIGHT_GRAY_WOOL, 64);
+
+                            p.getInventory().setItem(2, grayBlocks);
+                            p.getInventory().setItem(3, grayBlocks);
+                            p.getInventory().setItem(4, grayBlocks);
+                            p.getInventory().setItem(5, grayBlocks);
+                            p.getInventory().setItem(6, grayBlocks);
+                            p.getInventory().setItem(7, grayBlocks);
+
+                        }
+                    }
+                }
             }
         }
 

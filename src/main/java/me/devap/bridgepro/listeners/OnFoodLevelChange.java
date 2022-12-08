@@ -27,9 +27,7 @@ public class OnFoodLevelChange implements Listener {
                     e.setCancelled(true);
                 }
             }
-            else{
-                e.setCancelled(false);
-            }
+            e.setCancelled(plugin.lobby.contains(p));
         }
     }
 }

@@ -29,9 +29,15 @@ public class OnBlockPlace implements Listener {
                 public void run() {
                     // If the player is in-game, not in creative and placed a stone block. Set to air after ... seconds.
                     if(!p.getGameMode().equals(GameMode.CREATIVE)){
-                        if (placedBlock.getType().equals(Material.LIGHT_GRAY_WOOL)){
-                            e.getPlayer().spawnParticle(Particle.BLOCK_DUST,placedBlock.getLocation(),30,placedBlock.getBlockData());
+                        if (placedBlock.getType().equals(Material.LIGHT_GRAY_WOOL) ||
+                                placedBlock.getType().equals(Material.GREEN_WOOL) ||
+                                    placedBlock.getType().equals(Material.CYAN_WOOL) ||
+                                        placedBlock.getType().equals(Material.PURPLE_WOOL) ||
+                                            placedBlock.getType().equals(Material.RED_WOOL)) {
+
+                            e.getPlayer().spawnParticle(Particle.BLOCK_DUST,placedBlock.getLocation(),50,placedBlock.getBlockData());
                             placedBlock.setType(Material.AIR);
+
                         }
                     }
                 }

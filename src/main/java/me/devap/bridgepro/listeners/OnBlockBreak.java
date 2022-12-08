@@ -1,6 +1,7 @@
 package me.devap.bridgepro.listeners;
 
 import me.devap.bridgepro.BridgePro;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,7 +24,9 @@ public class OnBlockBreak implements Listener {
         if(plugin.ingame.contains(p) || plugin.lobby.contains(p)){
             if(plugin.getConfig().getBoolean("disable-block-breaking")){
                 // If the player is not op, cancel the event.
-                e.setCancelled(true);
+                if(!p.getGameMode().equals(GameMode.CREATIVE)){
+                    e.setCancelled(true);
+                }
             }
         }
     }

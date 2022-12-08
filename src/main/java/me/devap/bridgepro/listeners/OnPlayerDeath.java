@@ -37,6 +37,7 @@ public class OnPlayerDeath implements Listener {
                 killstreak.remove(killed.getName());
             }
         }*/
+
         // If player is in-game, set the death message to ...
         if (e.getEntity().getType().equals(EntityType.PLAYER)) {
             if(plugin.ingame.contains(p) || plugin.lobby.contains(p)){

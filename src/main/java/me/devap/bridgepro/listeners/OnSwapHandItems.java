@@ -31,6 +31,7 @@ public class OnSwapHandItems implements Listener {
                         e.getOffHandItem().getType().equals(Material.BOOK) ||
                         (e.getOffHandItem().getType().equals(Material.PAPER)) ||
                         (e.getOffHandItem().getType().equals(Material.DIAMOND)) ||
+                        (e.getOffHandItem().getType().equals(Material.STICK)) ||
                         (e.getOffHandItem().getType().equals(Material.BLAZE_ROD))) {
                     if(e.getOffHandItem().hasItemMeta()){
                         e.setCancelled(true);
@@ -41,6 +42,7 @@ public class OnSwapHandItems implements Listener {
                         e.getMainHandItem().getType().equals(Material.BOOK) ||
                         (e.getOffHandItem().getType().equals(Material.PAPER)) ||
                         (e.getOffHandItem().getType().equals(Material.DIAMOND)) ||
+                        (e.getOffHandItem().getType().equals(Material.STICK)) ||
                         (e.getOffHandItem().getType().equals(Material.BLAZE_ROD))) {
                     if(e.getMainHandItem().hasItemMeta()){
                         e.setCancelled(true);
